@@ -1,0 +1,26 @@
+import { Meta, Typeset } from '@storybook/addon-docs/blocks';
+import typography from './resource/typography';
+
+<Meta title="Design|Typography" />
+
+# Typography
+
+**Font:** Nunito Sans(default), Segoe UI(segoe), Arial(arial), Sans-serif(sans), Helvetica(helvet)
+
+**Weights:** 400(regular), 700(bold), 800(extrabold), 900(black)
+
+<Typeset
+  fontFamily={typography.font.default}
+  fontSizes={[
+    Number(typography.size.s1),
+    Number(typography.size.s2),
+    Number(typography.size.s3),
+    Number(typography.size.m1),
+    Number(typography.size.m2),
+    Number(typography.size.m3),
+    Number(typography.size.l1),
+    Number(typography.size.l2),
+    Number(typography.size.l3)
+  ]}
+  fontWeight={typography.weight.bold}
+/>
