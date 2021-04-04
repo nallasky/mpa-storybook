@@ -13,6 +13,7 @@
     "@storybook/addons": "^5.3.19",
     "@storybook/react": "^5.3.19",
     "babel-loader": "^8.1.0",
+    "babel-plugin-named-asset-import": "^0.3.7",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react-app": "^9.1.2",
     "css-loader": "^3.5.3",

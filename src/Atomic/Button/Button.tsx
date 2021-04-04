@@ -2,25 +2,33 @@
 import { jsx, css } from '@emotion/core';
 
 type ButtonProps = {
-	/** 버튼 안의 내용 */
+	/** 버튼 안에 표시할 텍스트를 설정합니다. */
 	children: React.ReactNode;
-	/** 클릭 시 호출되는 함수 */
+	/** 클릭 시 호출되는 함수를 설정합니다. */
 	onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 	/** 버튼의 테마를 설정합니다. */
-	theme: 'blue' | 'green' | 'orange';
+	theme: 'blue' | 'green' | 'orange' | 'white';
 	/** 버튼의 크기를 설정합니다. */
 	size: 'sm' | 'md' | 'lg';
-	/** 버튼을 비활성화 시킵니다. */
+	/** 버튼의 활성화 여부를 설정합니다. */
 	disabled?: boolean;
 	/** 버튼의 너비를 설정합니다. */
 	width?: string | number;
+	/** 버튼 안에 아이콘만 표시할 때 설정합니다. */
+	iconOnly?: boolean;
 };
 
 /** Button 컴포넌트는 어떠한 작업을 트리거 할 때 사용합니다. */
-const Button = ({ children, onClick, theme, size, disabled, width }: ButtonProps) => {
+const Button = ({ children, onClick, theme, size, disabled, width, iconOnly }: ButtonProps) => {
 	return (
 		<button
-				css={[style, themes[theme], sizes[size], { width }]}
+				css={[
+					style,
+					themes[theme],
+					sizes[size],
+					{ width },
+					iconOnly && [iconOnlyStyle, iconOnlySizes[size]]
+				]}
 				onClick={onClick}
 				disabled={disabled}
 		>
@@ -39,7 +47,7 @@ const style = css`
 	border: none;
 	color: white;
 	box-sizing: border-box;
-	border-radius: .25rem;
+	border-radius: .5rem;
   height: 2rem;
   font-size: 0.875rem;
   padding: 0 1rem;
@@ -47,7 +55,6 @@ const style = css`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-	transition: transform .15s, box-shadow .15s;
 	box-shadow: 0px 3px 3px rgba(0,0,0,0.25);
 	&:active:enabled {
 		transform: translateY(2px);
@@ -56,6 +63,11 @@ const style = css`
 	&:disabled {
 		cursor: not-allowed;
 	}
+  svg {
+  	fill: white;
+    width: 1em;
+    margin-right: 1em;
+  }
 `;
 
 const themes = {
@@ -85,6 +97,25 @@ const themes = {
 		&:disabled {
 			background: rgba(232, 92, 25, .4);
 		}
+	`,
+	white: css`
+		background: white;
+		color: black;
+		border: 1px solid rgba(0,0,0,.1);
+		box-shadow: 0px 3px 3px rgba(0,0,0,0.1);
+    &:hover:enabled {
+      background: rgba(0, 0, 0, .05);
+    }
+		&:disabled {
+			color: rgba(0, 0, 0, .2);
+			background: rgba(0, 0, 0, .04);
+			svg {
+				fill: rgba(0, 0, 0, .2);
+			}
+		}
+		svg {
+			fill: black;
+		}
 	`
 };
 
@@ -103,6 +134,26 @@ const sizes = {
     height: 3rem;
     font-size: 1.125rem;
     padding: 0 1.5rem;
+  `
+};
+
+const iconOnlyStyle = css`
+  padding: 0;
+  border-radius: 50%;
+  svg {
+    margin: 0;
+  }
+`;
+
+const iconOnlySizes = {
+	sm: css`
+    width: 1.75rem;
+  `,
+	md: css`
+    width: 2.5rem;
+  `,
+	lg: css`
+    width: 3rem;
   `
 };
 
