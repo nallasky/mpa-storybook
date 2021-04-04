@@ -160,12 +160,12 @@ export const iconOnly = () => {
 					</Button>
 				</div>
 				<div>
-					<Button iconOnly size="md">
+					<Button iconOnly size="md" theme="green">
 						<Icon icon="heart" />
 					</Button>
 				</div>
 				<div>
-					<Button iconOnly size="lg">
+					<Button iconOnly size="lg" theme="orange">
 						<Icon icon="heart" />
 					</Button>
 				</div>
