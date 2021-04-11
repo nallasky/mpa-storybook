@@ -10,16 +10,20 @@ type DividerProps = {
   width?: string | number;
   /** Divider의 높이를 설정합니다. */
   height?: string | number;
+  /** Divider에 별도의 스타일을 지정하는 경우에 설정합니다. */
+  style?: {}
 };
 
 /** Divider 컴포넌트는 콘텐츠와 콘텐츠 사이를 구분할 때 사용합니다. */
-const Divider = ({ color, type, width, height }: DividerProps) => {
+const Divider = ({ color, type, width, height, style }: DividerProps) => {
   return (
       <hr css={[
-        { width: width || '100%', borderWidth: height || '1px', margin: '0' },
+        { width: width || '100%', borderWidth: height || '1px' },
           colors[color],
-          types[type]
-      ]}/>
+          types[type],
+          style
+        ]}
+      />
   );
 };
 
@@ -30,7 +34,7 @@ Divider.defaultProps = {
 
 const colors = {
   'gray': css`
-    border-color: rgba(0,0,0,.2)
+    border-color: rgba(0,0,0,.1);
   `,
   'black': css`
     border-color: black;

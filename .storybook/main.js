@@ -23,6 +23,17 @@ module.exports = {
                         }
                       }
                     }
+                  ],
+                  [
+                    require.resolve('babel-plugin-module-resolver'),
+                    {
+                      "root": ["./"],
+                      "alias": {
+                        "@button": "./src/Atomic/Button",
+                        "@divider": "./src/Atomic/Divider",
+                        "@icon": "./src/Atomic/Icon"
+                      }
+                    }
                   ]
                 ]
               }

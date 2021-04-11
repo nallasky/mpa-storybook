@@ -49,6 +49,7 @@ const style = css`
 	box-sizing: border-box;
 	border-radius: .5rem;
   height: 2rem;
+  font-family: Saira, "Nunito Sans";
   font-size: 0.875rem;
   padding: 0 1rem;
   font-weight: 600;

@@ -1,10 +1,10 @@
 /** @jsx jsx */
 import React from 'react';
-import Button from './Button';
+import Button from '@button/Button';
 import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { jsx, css } from '@emotion/core';
-import Icon from '../../Icon/Icon';
+import Icon from '@icon/Icon';
 
 export default {
 	title: 'Atomic|Button',

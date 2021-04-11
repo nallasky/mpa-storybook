@@ -2,7 +2,7 @@
 import React from 'react';
 import { withKnobs  } from '@storybook/addon-knobs';
 import { jsx, css } from '@emotion/core';
-import Divider from './Divider';
+import Divider from '@divider/Divider';
 
 export default {
   title: 'Atomic|Divider',
@@ -56,19 +56,19 @@ export const width = () => {
   return (
       <div css={dividerWrapper}>
         <div>
-          <Divider width={"200px"} />
+          <Divider width={"200px"} style={{ margin: 0 }} />
         </div>
         <div>
-          <Divider width={'50%'} />
+          <Divider width={'50%'} style={{ margin: 0 }} />
         </div>
         <div>
-          <Divider width={'70%'} />
+          <Divider width={'70%'} style={{ margin: 0 }} />
         </div>
         <div>
-          <Divider width={'50rem'} />
+          <Divider width={'50rem'} style={{ margin: 0 }} />
         </div>
         <div>
-          <Divider width={'100%'} />
+          <Divider width={'100%'} style={{ margin: 0 }} />
         </div>
       </div>
   )
