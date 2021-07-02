@@ -5,11 +5,13 @@ import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { jsx, css } from '@emotion/core';
 import Icon from '@icon/Icon';
+import results from '../../../.jest-test-results.json';
+import { withTests } from "@storybook/addon-jest";
 
 export default {
   title: 'Atomic|Button',
   component: Button,
-  decorators: [withKnobs]
+  decorators: [withKnobs, withTests({ results })]
 };
 
 export const button = () => {
@@ -34,6 +36,10 @@ export const button = () => {
 
 button.story = {
   name: 'Default'
+};
+
+button.parameters = {
+  jest: ["__test__/Button.test.tsx"]
 };
 
 export const blueButton = () => {

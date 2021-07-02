@@ -5,3 +5,4 @@ logs
 **/*.back.*
 node_modules
 .idea
+.jest-test-results.json

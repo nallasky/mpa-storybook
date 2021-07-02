@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
+import { jsx, css, keyframes } from '@emotion/core';
 
 type ButtonProps = {
   /** 버튼 안에 표시할 텍스트를 설정합니다. */
@@ -61,61 +61,58 @@ const style = css`
     transform: translateY(2px);
     box-shadow: none;
 	}
+  &:hover:not(:disabled) {
+    cursor: pointer;
+  }
 	&:disabled {
     cursor: not-allowed;
 	}
   svg {
-    fill: white;
+    fill: currentColor;
     width: 1em;
     margin-right: 1em;
   }
 `;
 
 const themes = {
-	blue: css`
-		background: rgb(24, 144, 255);
-		&:hover:enabled {
-			background: rgba(24, 144, 255, .8);
-		}
-		&:disabled {
-			background: rgba(24, 144, 255, .4);
-		}
+  blue: css`
+    background: rgb(24, 144, 255);
+    &:hover:not(:disabled) {
+      background: rgba(24, 144, 255, 0.8);
+    }
+    &:disabled {
+      background: rgba(24, 144, 255, 0.4);
+    }
   `,
   green: css`
-	  background: rgb(60, 191, 100);
-	  &:hover:enabled {
-	    background: rgba(60, 191, 100, .8);
-	  }
-	  &:disabled {
-	    background: rgba(60, 191, 100, .4);
-	  }
+    background: rgb(60, 191, 100);
+    &:hover:not(:disabled) {
+      background: rgba(60, 191, 100, 0.8);
+    }
+    &:disabled {
+      background: rgba(60, 191, 100, 0.4);
+    }
   `,
   orange: css`
-	  background: rgb(232, 92, 25);
-	  &:hover:enabled {
-	    background: rgba(232, 92, 25, .8);
-	  }
-	  &:disabled {
-	    background: rgba(232, 92, 25, .4);
-	  }
+    background: rgb(232, 92, 25);
+    &:hover:not(:disabled) {
+      background: rgba(232, 92, 25, 0.8);
+    }
+    &:disabled {
+      background: rgba(232, 92, 25, 0.4);
+    }
   `,
   white: css`
     background: white;
-    color: black;
-    border: 1px solid rgba(0,0,0,.1);
-    box-shadow: 0px 3px 3px rgba(0,0,0,0.1);
-	  &:hover:enabled {
-	    background: rgba(0, 0, 0, .05);
-	  }
-    &:disabled {
-      color: rgba(0, 0, 0, .2);
-      background: rgba(0, 0, 0, .04);
-      svg {
-        fill: rgba(0, 0, 0, .2);
-      }
+    color: rgba(0, 0, 0, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
+    &:hover:not(:disabled) {
+      background: rgba(0, 0, 0, 0.05);
     }
-    svg {
-      fill: black;
+    &:disabled {
+      color: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.04);
     }
   `
 };
