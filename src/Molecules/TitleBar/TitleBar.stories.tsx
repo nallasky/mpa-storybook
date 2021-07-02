@@ -6,7 +6,7 @@ import TitleBar from "./TitleBar";
 
 
 export default {
-  title: 'Molecules|TitleBar',
+  title: 'Molecules|Title bar',
   component: TitleBar,
   decorators: [withKnobs]
 };

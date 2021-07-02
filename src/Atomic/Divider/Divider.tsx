@@ -17,13 +17,13 @@ type DividerProps = {
 /** Divider 컴포넌트는 콘텐츠와 콘텐츠 사이를 구분할 때 사용합니다. */
 const Divider = ({ color, type, width, height, style }: DividerProps) => {
   return (
-      <hr css={[
-        { width: width || '100%', borderWidth: height || '1px' },
-          colors[color],
-          types[type],
-          style
-        ]}
-      />
+    <hr css={[
+      { width: width || '100%', borderWidth: height || '1px' },
+        colors[color],
+        types[type],
+        style
+      ]}
+    />
   );
 };
 

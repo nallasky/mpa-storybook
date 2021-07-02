@@ -6,13 +6,13 @@ import Icon from '@icon/Icon';
 
 const TitleBar = () => {
   return (
-      <div css={wrapperStyle}>
-        <div css={iconTextStyle}>
-          <Icon icon={'bulb'} color={'#096dd9'} size={'40px'} />
-          <label css={labelStyle}>Title</label>
-        </div>
-        <Divider style={{ height: 0 }}/>
+    <div css={wrapperStyle}>
+      <div css={iconTextStyle}>
+        <Icon icon={'bulb'} color={'#096dd9'} size={'40px'} />
+        <label css={labelStyle}>FOCUS</label>
       </div>
+      <Divider style={{ height: 0 }}/>
+    </div>
   );
 };
 
@@ -27,7 +27,6 @@ const iconTextStyle = css`
   position: absolute;
   background: white;
   display: flex;
-  left: 0;
 `;
 
 const labelStyle = css`

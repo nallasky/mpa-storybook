@@ -25,10 +25,10 @@ export type IconProps = {
 const Icon = ({ icon, color, size, className }: IconProps) => {
   const SVGIcon = icons[icon];
   return (
-      <SVGIcon
-          css={{ fill: color || 'currentColor', width: size, height: 'auto' }}
-          className={className}
-      />
+    <SVGIcon
+      css={{ fill: color || 'currentColor', width: size, height: 'auto' }}
+      className={className}
+    />
   );
 };
 

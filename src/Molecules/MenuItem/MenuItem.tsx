@@ -10,7 +10,7 @@ const MenuItem = () => {
         <p css={titleStyle}>AFC</p>
         <p css={contentStyle}>Plate Auto Focus Compensation Data</p>
       </div>
-      <Button theme="blue" width={"80%"}>BUTTON</Button>
+      <Button theme="blue" width={"80%"}>Analysis Now</Button>
     </div>
   );
 };

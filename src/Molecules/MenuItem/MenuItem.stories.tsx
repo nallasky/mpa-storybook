@@ -5,16 +5,16 @@ import { jsx, css } from '@emotion/core';
 import MenuItem from "./MenuItem";
 
 export default {
-  title: 'Molecules|MenuItem',
+  title: 'Molecules|Menu item',
   component: MenuItem,
   decorators: [withKnobs]
 };
 
 export const menuItem = () => {
   return (
-      <div css={style}>
-        <MenuItem />
-      </div>
+    <div css={style}>
+      <MenuItem />
+    </div>
   );
 };
 
