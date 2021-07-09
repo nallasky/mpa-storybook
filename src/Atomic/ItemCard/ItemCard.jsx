@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import PropTypes from "prop-types";
 
 /**
- * ItemCard 컴포넌트는 박스를 렌더링합니다.
+ * ItemCard 컴포넌트는 빈 박스를 렌더링합니다.
  
  * Analysis Tool에서는 MainPageItem 컴포넌트에서 다른 컴포넌트와 함께 조합하여 사용하고 있습니다.
  */

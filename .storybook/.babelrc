@@ -22,7 +22,8 @@
 				"alias": {
 				  "@Button": "./src/Atomic/Button",
 				  "@Divider": "./src/Atomic/Divider",
-				  "@ItemCard": "./src/Atomic/ItemCard"
+				  "@ItemCard": "./src/Atomic/ItemCard",
+					"@Graph": "./src/Atomic/Graph"
 				}
 			}
 		]
