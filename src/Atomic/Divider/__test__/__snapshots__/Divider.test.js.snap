@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Divider test matches snapshot (black color) 1`] = `ReactWrapper {}`;
+
+exports[`Divider test matches snapshot (change height) 1`] = `ReactWrapper {}`;
+
+exports[`Divider test matches snapshot (change width) 1`] = `ReactWrapper {}`;
+
+exports[`Divider test matches snapshot (custom style) 1`] = `ReactWrapper {}`;
+
+exports[`Divider test matches snapshot (dot type) 1`] = `ReactWrapper {}`;
+
+exports[`Divider test matches snapshot (initialProp) 1`] = `ReactWrapper {}`;
+
+exports[`Divider test matches snapshot (solid type) 1`] = `ReactWrapper {}`;

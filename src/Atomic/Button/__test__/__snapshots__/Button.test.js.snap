@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button test matches snapshot (change width) 1`] = `ReactWrapper {}`;
+
+exports[`Button test matches snapshot (disabled) 1`] = `ReactWrapper {}`;
+
+exports[`Button test matches snapshot (green theme) 1`] = `ReactWrapper {}`;
+
+exports[`Button test matches snapshot (icon only) 1`] = `ReactWrapper {}`;
+
+exports[`Button test matches snapshot (initialProp) 1`] = `ReactWrapper {}`;
+
+exports[`Button test matches snapshot (lg size) 1`] = `ReactWrapper {}`;
+
+exports[`Button test matches snapshot (md size) 1`] = `ReactWrapper {}`;
+
+exports[`Button test matches snapshot (orange theme) 1`] = `ReactWrapper {}`;
+
+exports[`Button test matches snapshot (white theme) 1`] = `ReactWrapper {}`;

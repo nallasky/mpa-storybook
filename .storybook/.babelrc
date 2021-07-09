@@ -1,0 +1,30 @@
+{
+  "plugins": [
+		"babel-plugin-macros",
+		[
+		  "@emotion/babel-plugin-jsx-pragmatic",
+		  {
+			"export": "jsx",
+			"import": "__cssprop",
+			"module": "@emotion/react"
+		  }
+		],
+		[
+		  "@babel/plugin-transform-react-jsx",
+		  {
+			"pragma": "__cssprop"
+		  }
+		],
+		[
+			"module-resolver", 
+			{
+				"root": ["./"],
+				"alias": {
+				  "@Button": "./src/Atomic/Button",
+				  "@Divider": "./src/Atomic/Divider",
+				  "@ItemCard": "./src/Atomic/ItemCard"
+				}
+			}
+		]
+	]
+}

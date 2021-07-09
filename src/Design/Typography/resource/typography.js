@@ -17,7 +17,7 @@ const typography = {
         black: 900
     },
     font: {
-        default: "Nunito Sans",
+        default: "saira",
         segoe: "Segoe UI",
         arial: "Arial",
         sans: "sans-serif",

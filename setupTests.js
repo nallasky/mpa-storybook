@@ -1,5 +1,6 @@
+import "regenerator-runtime/runtime";
 import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import enableHooks from 'jest-react-hooks-shallow';
 
 window.URL.createObjectURL = () => {};

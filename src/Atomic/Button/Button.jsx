@@ -1,33 +1,20 @@
-/** @jsx jsx */
-import { jsx, css, keyframes } from '@emotion/core';
+import React from "react";
+import { css } from "@emotion/react";
+import PropTypes from "prop-types";
 
-type ButtonProps = {
-  /** 버튼 안에 표시할 텍스트를 설정합니다. */
-  children: React.ReactNode;
-  /** 클릭 시 호출되는 함수를 설정합니다. */
-  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
-  /** 버튼의 테마를 설정합니다. */
-  theme: 'blue' | 'green' | 'orange' | 'white';
-  /** 버튼의 크기를 설정합니다. */
-  size: 'sm' | 'md' | 'lg';
-  /** 버튼의 활성화 여부를 설정합니다. */
-  disabled?: boolean;
-  /** 버튼의 너비를 설정합니다. */
-  width?: string | number;
-  /** 버튼 안에 아이콘만 표시할 때 설정합니다. */
-  iconOnly?: boolean;
-};
-
-/** Button 컴포넌트는 어떠한 작업을 트리거 할 때 사용합니다. */
-const Button = ({ children, onClick, theme, size, disabled, width, iconOnly }: ButtonProps) => {
+/**
+ * Button 컴포넌트는 어떠한 작업을 트리거 할 때 사용합니다.
+ */
+const Button = ({ children, onClick, theme, size, disabled, width, iconOnly, style }) => {
 	return (
 		<button
 			css={[
-				style,
+				defStyle,
 				themes[theme],
 				sizes[size],
 				{ width },
-				iconOnly && [iconOnlyStyle, iconOnlySizes[size]]
+				iconOnly && [iconOnlyStyle, iconOnlySizes[size]],
+				style
 			]}
 			onClick={onClick}
 			disabled={disabled}
@@ -37,25 +24,60 @@ const Button = ({ children, onClick, theme, size, disabled, width, iconOnly }: B
 	);
 };
 
+Button.propTypes = {
+  /**
+   * 버튼 안에 표시할 내용을 설정합니다.
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * 버튼 클릭 시 호출되는 함수를 설정합니다.
+   */
+  onClick: PropTypes.func,
+  /**
+   * 버튼의 테마를 설정합니다.
+   */
+  theme: PropTypes.oneOf(['blue', 'green', 'orange', 'white']),
+  /**
+   * 버튼의 크기를 설정합니다.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  /**
+   * 버튼의 활성화 여부를 설정합니다.
+   */
+  disabled: PropTypes.bool,
+  /**
+   * 버튼의 너비를 설정합니다.
+   */
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * 버튼 안에 아이콘만 표시할 때 설정합니다.
+   */
+  iconOnly: PropTypes.bool,
+  /**
+   * 버튼에 커스텀 스타일을 적용할 때 설정합니다.
+   */
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
+};
+
 Button.defaultProps = {
 	theme: 'blue',
 	size: 'sm'
 };
 
-const style = css`
+const defStyle = css`
 	outline: none;
 	border: none;
 	color: white;
 	box-sizing: border-box;
 	border-radius: .5rem;
-  height: 2rem;
-  font-family: Saira, "Nunito Sans";
-  font-size: 0.875rem;
-  padding: 0 1rem;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+	height: 2rem;
+	font-family: Saira, "Nunito Sans";
+	font-size: 0.875rem;
+	padding: 0 1rem;
+	font-weight: 600;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	box-shadow: 0px 3px 3px rgba(0,0,0,0.25);
 	&:active:enabled {
     transform: translateY(2px);

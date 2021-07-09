@@ -1,67 +1,44 @@
-/** @jsx jsx */
-import React from 'react';
-import Button from '@button/Button';
-import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
-import { action } from '@storybook/addon-actions';
-import { jsx, css } from '@emotion/core';
-import Icon from '@icon/Icon';
-import results from '../../../.jest-test-results.json';
+import React from "react";
+import Button from './Button';
+import { css } from '@emotion/react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAddressCard, faBandAid, faBell, faBolt, faClock } from "@fortawesome/free-solid-svg-icons";
 import { withTests } from "@storybook/addon-jest";
+import results from '../../.jest-test-results.json';
 
 export default {
-  title: 'Atomic|Button',
+  title: 'Atomic/Button',
   component: Button,
-  decorators: [withKnobs, withTests({ results })]
+  decorators: [withTests({ results })]
 };
 
-export const button = () => {
-	const label = text('children','BUTTON');
-	const size = select('size',['sm', 'md', 'lg'], 'sm');
-	const theme = select('theme',['blue', 'green', 'orange', 'white'],'blue');
-	const disabled = boolean('disabled', false);
-	const width = text('width', '');
-
+const Template = (args) => {
 	return (
-	  <Button
-	    size={size}
-	    theme={theme}
-	    disabled={disabled}
-	    width={width}
-	    onClick={action('onClick')}
-	  >
-	    {label}
-	  </Button>
+		<Button
+			theme={args.theme}
+			size={args.size}
+			disabled={args.disabled}
+			width={args.width}
+			iconOnly={args.iconOnly}
+			style={args.style}
+			onClick={args.onClick}
+		>
+			{args.children}
+		</Button>
 	);
 };
 
-button.story = {
-  name: 'Default'
-};
-
-button.parameters = {
-  jest: ["__test__/Button.test.tsx"]
-};
-
-export const blueButton = () => {
-  return <Button theme="blue">BUTTON</Button>;
-};
-
-export const greenButton = () => {
-  return <Button theme="green">BUTTON</Button>;
-};
-
-export const orangeButton = () => {
-  return <Button theme="orange">BUTTON</Button>;
-};
-
-export const whiteButton = () => {
-  return <Button theme="white">BUTTON</Button>;
+export const Basic = Template.bind({});
+Basic.args = {
+	children: "BUTTON",
+	theme: "blue",
+	size: "sm"
 };
 
 const buttonWrapper = css`
   .description {
     margin-bottom: 0.5rem;
-    font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Saira;
     font-weight: 600;
   }
   & > div + div {
@@ -69,7 +46,30 @@ const buttonWrapper = css`
   }
 `;
 
-export const sizes = () => {
+export const Themes = () => {
+  return (
+    <div css={buttonWrapper}>
+      <div>
+        <div className="description">Default(Blue)</div>
+        <Button>BUTTON</Button>
+      </div>
+      <div>
+        <div className="description">Green</div>
+        <Button theme="green">BUTTON</Button>
+      </div>
+      <div>
+        <div className="description">Orange</div>
+        <Button theme="orange">BUTTON</Button>
+      </div>
+      <div>
+          <div className="description">White</div>
+        <Button theme="white">BUTTON</Button>
+      </div>
+    </div>
+  );
+};
+
+export const Sizes = () => {
   return (
     <div css={buttonWrapper}>
       <div>
@@ -88,7 +88,7 @@ export const sizes = () => {
   );
 };
 
-export const disabled = () => {
+export const Disabled = () => {
   return (
     <div css={buttonWrapper}>
       <div>
@@ -113,7 +113,7 @@ export const disabled = () => {
   );
 };
 
-export const customSized = () => {
+export const Width = () => {
   return (
     <div css={buttonWrapper}>
       <div>
@@ -126,49 +126,54 @@ export const customSized = () => {
   );
 };
 
-export const withIcon = () => {
+export const WithIcon = () => {
   return (
     <div css={buttonWrapper}>
       <div>
         <Button>
-          <Icon icon="setting" /> BUTTON
+          <FontAwesomeIcon icon={faAddressCard} /> BUTTON
         </Button>
       </div>
       <div>
         <Button theme="green">
-          <Icon icon="setting" /> BUTTON
+          <FontAwesomeIcon icon={faBandAid} /> BUTTON
         </Button>
       </div>
       <div>
         <Button theme="orange">
-          <Icon icon="heart" /> BUTTON
+          <FontAwesomeIcon icon={faBell} /> BUTTON
         </Button>
       </div>
       <div>
         <Button theme="white">
-          <Icon icon="binoculars" /> BUTTON
+          <FontAwesomeIcon icon={faBolt} /> BUTTON
         </Button>
       </div>
     </div>
   );
 };
 
-export const iconOnly = () => {
+export const IconOnly = () => {
   return (
     <div css={buttonWrapper}>
       <div>
         <Button iconOnly>
-          <Icon icon="heart" />
+          <FontAwesomeIcon icon={faClock} />
         </Button>
       </div>
       <div>
         <Button iconOnly size="md" theme="green">
-          <Icon icon="heart" />
+          <FontAwesomeIcon icon={faClock} />
         </Button>
       </div>
       <div>
         <Button iconOnly size="lg" theme="orange">
-          <Icon icon="heart" />
+          <FontAwesomeIcon icon={faClock} />
+        </Button>
+      </div>
+      <div>
+        <Button iconOnly size="lg" theme="white">
+          <FontAwesomeIcon icon={faClock} />
         </Button>
       </div>
     </div>
