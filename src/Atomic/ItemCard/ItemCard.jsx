@@ -8,14 +8,14 @@ import PropTypes from "prop-types";
  * Analysis Tool에서는 MainPageItem 컴포넌트에서 다른 컴포넌트와 함께 조합하여 사용하고 있습니다.
  */
 const ItemCard = ({ children, width, height, style }) => {
-  return <div css={[wrapperStyle, { width, height}, style]}>{children}</div>;
+  return <div css={[wrapperStyle, { width, height }, style]}>{children}</div>;
 };
 
 ItemCard.propTypes = {
   /**
    * ItemCard 안에 표시할 내용을 설정합니다.
    */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.oneOfType([PropTypes.elementType, PropTypes.element]).isRequired,
   /**
    * ItemCard의 너비를 설정합니다.
    */

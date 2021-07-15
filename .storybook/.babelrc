@@ -23,7 +23,9 @@
 				  "@Button": "./src/Atomic/Button",
 				  "@Divider": "./src/Atomic/Divider",
 				  "@ItemCard": "./src/Atomic/ItemCard",
-					"@Graph": "./src/Atomic/Graph"
+					"@Graph": "./src/Atomic/Graph",
+					"@FormCard": "./src/Atomic/FormCard",
+					"@Modal": "./src/Atomic/Modal"
 				}
 			}
 		]

@@ -1,7 +1,8 @@
 import React from "react";
 import ItemCard from './ItemCard';
 import { css } from '@emotion/react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUsers } from "@fortawesome/free-solid-svg-icons";
 
 export default {
   title: 'Atomic/ItemCard',
@@ -20,37 +21,45 @@ const Template = (args) => {
 	);
 };
 
-const AntdForm = () => {
+const ExamChildren = () => {
 	return (
-		<Form
-		  name="basic"
-		  initialValues={{ remember: true }}
-		>
-		  <Form.Item
-			label="Username"
-			name="username"
-			rules={[{ required: true, message: 'Please input your username!' }]}
-		  >
-			<Input />
-		  </Form.Item>
-		  <Form.Item
-			label="Password"
-			name="password"
-			rules={[{ required: true, message: 'Please input your password!' }]}
-		  >
-			<Input.Password />
-		  </Form.Item>
-		  <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-			<Checkbox>Remember me</Checkbox>
-		  </Form.Item>
-		  <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-			<Button type="primary" htmlType="submit">
-			  Submit
-			</Button>
-		  </Form.Item>
-		</Form>
+		<>
+			<p>
+				Team Builder
+			</p>
+			<p>
+				Scans our talent network to create the optimal team for your project.
+			</p>
+			<p>
+				<FontAwesomeIcon icon={faUsers} size="4x" />
+			</p>
+		</>
 	);
 };
+
+const examStyle = css`
+	border-top: 8px solid #8ce99a;
+	box-shadow: 0 4px 16px rgb(0,0,0,.25);
+	padding: 0 2rem;
+	& > p {
+		width: 100%;
+		&:nth-child(1) {
+			font-size: 26px;
+			font-weight: 700;
+			margin: 1rem 0;
+			text-shadow: 2px 2px 3px rgba(0,0,0,.3);
+		}
+		&:nth-child(2) {
+			margin: 0;
+			font-size: 14px;
+			color: rgba(0,0,0,.6);
+		}
+		&:nth-child(3) {
+			color: #2bb940;
+			text-align: right;
+		}
+	}
+`;
 
 export const Basic = Template.bind({});
 Basic.args = {
@@ -59,10 +68,10 @@ Basic.args = {
 	height: "250px",
 };
 
-export const Examples = Template.bind({});
-Examples.args = {
-	children: <AntdForm />,
-	width: "400px",
-	height: "400px",
-	style: { backgroundColor: "#f7f3f3"}
+export const Example = Template.bind({});
+Example.args = {
+	children: <ExamChildren />,
+	width: "380px",
+	height: "240px",
+	style: examStyle
 };
