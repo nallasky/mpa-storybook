@@ -28,11 +28,24 @@ Basic.args = {
   style: {}
 };
 
-const densityX = [], densityY = [];
+const normal = () => {
+  let x = 0, y = 0, rds = 10, c;
+  while (rds === 0 || rds > 1) {
+    x = Math.random() * 2 - 1;
+    y = Math.random() * 2 - 1;
+    rds = x * x + y * y;
+  }
+  c = Math.sqrt(-2 * Math.log(rds) / rds);
+  return x * c;
+}
 
-for (let i = 0; i < 500; i++) {
-  densityX.push(Math.random());
-  densityY.push(Math.random() + 1);
+const N = 2000, step = 2.2 / 1999;
+let t = new Array(N), x = new Array(N), y = new Array(N);
+
+for(let i = 0; i < N; i++){
+  t[i] = -1 + step * i;
+  x[i] = (Math.pow(t[i], 3)) + (0.3 * normal());
+  y[i] = (Math.pow(t[i], 6)) + (0.3 * normal());
 }
 
 export const DensityChart = Template.bind({});
@@ -40,8 +53,25 @@ DensityChart.args = {
   plotProp: {
     data: [
       {
-        x: densityX,
-        y: densityY,
+        x: x,
+        y: y,
+        mode: "markers",
+        name: "points",
+        marker: {
+          color: "rgb(0, 0, 0)",
+          size: 1.5,
+          opacity: 0.3
+        },
+        type: "scatter"
+      },
+      {
+        x: x,
+        y: y,
+        name: "density",
+        ncontours: 20,
+        colorscale: "Blues",
+        reversescale: true,
+        showscale: false,
         type: "histogram2dcontour"
       }
     ],
@@ -49,7 +79,21 @@ DensityChart.args = {
       title: "Test Graph",
       font: {
         family: "Saira, 'Nunito Sans'"
-      }
+      },
+      showlegend: false,
+      autosize: false,
+      width: 600,
+      height: 550,
+      hovermode: "closest",
+      bargap: 0,
+      xaxis: {
+        showgrid: false,
+        zeroline: false
+      },
+      yaxis: {
+        showgrid: false,
+        zeroline: false
+      },
     }
   }
 };
