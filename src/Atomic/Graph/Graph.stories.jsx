@@ -43,7 +43,7 @@ const N = 2000, step = 2.2 / 1999;
 let t = new Array(N), x = new Array(N), y = new Array(N);
 
 for(let i = 0; i < N; i++){
-  t[i] = -1 + step * i;
+  t[i] = step * i - 1;
   x[i] = (Math.pow(t[i], 3)) + (0.3 * normal());
   y[i] = (Math.pow(t[i], 6)) + (0.3 * normal());
 }
@@ -58,7 +58,7 @@ DensityChart.args = {
         mode: "markers",
         name: "points",
         marker: {
-          color: "rgb(0, 0, 0)",
+          color: "rgb(0,0,0)",
           size: 1.5,
           opacity: 0.3
         },
