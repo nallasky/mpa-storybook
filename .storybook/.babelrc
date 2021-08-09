@@ -25,7 +25,8 @@
 				  "@ItemCard": "./src/Atomic/ItemCard",
 					"@Graph": "./src/Atomic/Graph",
 					"@FormCard": "./src/Atomic/FormCard",
-					"@Modal": "./src/Atomic/Modal"
+					"@Modal": "./src/Atomic/Modal",
+					"@SettingGraph": "./src/Molecules/SettingGraph"
 				}
 			}
 		]

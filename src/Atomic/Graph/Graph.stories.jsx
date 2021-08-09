@@ -81,9 +81,6 @@ DensityChart.args = {
         family: "Saira, 'Nunito Sans'"
       },
       showlegend: false,
-      autosize: false,
-      width: 600,
-      height: 550,
       hovermode: "closest",
       bargap: 0,
       xaxis: {
