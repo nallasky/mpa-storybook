@@ -1,3 +1,4 @@
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const path = require('path');
 const fixBabelImports = require("customize-cra").fixBabelImports;
 
@@ -27,6 +28,8 @@ module.exports = {
       libraryDirectory: 'es',
       style: true,
     })(config);
+
+    config.plugins.push(new AntdDayjsWebpackPlugin());
 
     return config;
   },

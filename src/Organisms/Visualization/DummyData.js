@@ -56,26 +56,25 @@ let dummyData = {
       "Date": false,
       "No.": false
     },
-    analysis: {}
+    row: {}
   }
 };
 
-export const createData = () => {
-  const dateArray = [
-    "2021-08-09 00:00:00",
-    "2021-08-10 00:00:00",
-    "2021-08-11 00:00:00",
-    "2021-08-12 00:00:00",
-    "2021-08-13 00:00:00",
-    "2021-08-14 00:00:00",
-    "2021-08-15 00:00:00",
-    "2021-08-16 00:00:00",
-  ];
+export const createData = (maxLength) => {
+  const now = new Date();
 
-  for (let i = 0; i < 7; i++) {
-    dummyData.data.analysis[i] = {
+  for (let i = 0; i < maxLength; i++) {
+    const dummyDate = new Date(now.setDate(now.getDate() + 1));
+    const year = dummyDate.getFullYear();
+    const month = ("0" + (dummyDate.getMonth() + 1)).slice(-2);
+    const day = ("0" + dummyDate.getDate()).slice(-2);
+    const hours = ("0" + dummyDate.getHours()).slice(-2);
+    const minutes = ("0" + dummyDate.getMinutes()).slice(-2);
+    const seconds = ("0" + dummyDate.getSeconds()).slice(-2);
+
+    dummyData.data.row[i] = {
       "No.": i + 1,
-      "Date": dateArray[i],
+      "Date": year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds,
       "Z Sensor Meas. BL Delta Max": Math.floor(Math.random() * 20000),
       "Z Sensor Meas. BC Delta Max": Math.floor(Math.random() * 20000),
       "Z Sensor Meas. BR Delta Max": Math.floor(Math.random() * 20000),

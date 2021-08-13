@@ -35,5 +35,5 @@ const Template = (args) => <Visualization {...args} />;
 export const Basic = Template.bind({})
 Basic.args = {
   option: optionData,
-  data: createData()
+  data: createData(7)
 };
