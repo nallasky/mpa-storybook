@@ -3,7 +3,7 @@ import Visualization from "./Visualization";
 import { createData } from "./DummyData";
 
 export default {
-  title: "Organisms/Visualization",
+  title: "Molecules/Visualization",
   component: Visualization
 };
 
@@ -22,7 +22,7 @@ const optionData = [
   },
   {
     type: "density plot",
-    z_axis: true
+    z_axis: false
   },
   {
     type: "bubble chart",
@@ -35,5 +35,6 @@ const Template = (args) => <Visualization {...args} />;
 export const Basic = Template.bind({})
 Basic.args = {
   option: optionData,
-  data: createData(7)
+  data: createData(7),
+  preview: true
 };

@@ -12,13 +12,15 @@ import Button from "@Button/Button";
 const MainPageItem = ({ mainText, subText, buttonText, onClick }) => {
   return (
     <ItemCard>
-      <div css={contentStyle}>
-        <p css={mainTextStyle}>{mainText}</p>
-        <p css={subTextStyle}>{subText}</p>
-      </div>
-      <Button width="80%" onClick={onClick}>
-        {buttonText}
-      </Button>
+      <>
+        <div css={contentStyle}>
+          <p css={mainTextStyle}>{mainText}</p>
+          <p css={subTextStyle}>{subText}</p>
+        </div>
+        <Button width="80%" onClick={onClick}>
+          {buttonText}
+        </Button>
+      </>
     </ItemCard>
   );
 };

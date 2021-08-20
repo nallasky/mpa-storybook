@@ -1,8 +1,60 @@
 let dummyData = {
+  period: {
+    start: "",
+    end: "",
+    selected: []
+  },
+  filter: [
+    {
+      target: "Device",
+      title: "Device",
+      type: "select",
+      mode: "plural",
+      options: ["SCAN3X2", "SCAN3X3", "SCAN3X4"],
+      selected: ["SCAN3X2", "SCAN3X3", "SCAN3X4"]
+    },
+    {
+      target: "Process",
+      title: "Process",
+      type: "select",
+      mode: "plural",
+      options: ["SCANBG", "SCANCG", "SCANDG"],
+      selected: ["SCANBG", "SCANCG", "SCANDG"]
+    }
+  ],
+  aggregation: {
+    target: "aggregation_by",
+    title: "Aggregation By",
+    type: "select",
+    mode: "subItem",
+    options: ["period", "column", "All"],
+    selected: "period",
+    subItem: {
+      column: {
+        target: "aggregation_val",
+        title: "",
+        type: "select",
+        mode: "singular",
+        options: ["device", "process"],
+        selected: "device"
+      },
+      period: {
+        target: "aggregation_val2",
+        title: "",
+        type: "text",
+        mode: "",
+        options: [],
+        selected: "1h"
+      }
+    }
+  },
   data: {
     disp_order: [
-      "No.",
       "Date",
+      "Device",
+      "Process",
+      "Lot ID",
+      "Plate Num",
       "Z Sensor Meas. BL Delta Max",
       "Z Sensor Meas. BC Delta Max",
       "Z Sensor Meas. BR Delta Max",
@@ -54,14 +106,20 @@ let dummyData = {
       "Roll AVE": true,
       "Roll Delta Max": true,
       "Date": false,
-      "No.": false
+      "Device": false,
+      "Process": false,
+      "Lot ID": false,
+      "Plate Num": false
     },
-    row: {}
+    analysis: {}
   }
 };
 
 export const createData = (maxLength) => {
   const now = new Date();
+
+  const deviceArr = ["SCAN3X2", "SCAN3X3", "SCAN3X4"];
+  const processArr = ["SCANBG", "SCANCG", "SCANDG"];
 
   for (let i = 0; i < maxLength; i++) {
     const dummyDate = new Date(now.setDate(now.getDate() + 1));
@@ -72,9 +130,12 @@ export const createData = (maxLength) => {
     const minutes = ("0" + dummyDate.getMinutes()).slice(-2);
     const seconds = ("0" + dummyDate.getSeconds()).slice(-2);
 
-    dummyData.data.row[i] = {
-      "No.": i + 1,
-      "Date": year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds,
+    dummyData.data.analysis[i] = {
+      "Date": i === maxLength - 1 ? "" : year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds,
+      "Device": i === maxLength - 1 ? "" : deviceArr[Math.floor(Math.random() * 3)],
+      "Process": i === maxLength - 1 ? "" : processArr[Math.floor(Math.random() * 3)],
+      "Lot ID": i === maxLength - 1 ? "" : "LOT" + Math.floor(Math.random() * 3),
+      "Plate Num": i === maxLength - 1 ? "" : Math.floor(Math.random() * 6),
       "Z Sensor Meas. BL Delta Max": Math.floor(Math.random() * 20000),
       "Z Sensor Meas. BC Delta Max": Math.floor(Math.random() * 20000),
       "Z Sensor Meas. BR Delta Max": Math.floor(Math.random() * 20000),
