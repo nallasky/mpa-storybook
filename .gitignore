@@ -6,3 +6,151 @@ logs
 node_modules
 .idea
 .jest-test-results.json
+
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+  useMemo,
+  ReactNode,
+  useDeferredValue,
+} from "react";
+
+interface VirtualListProps<T> {
+  items: T[];
+  itemHeight: number;
+  keyField: keyof T;
+  buffer?: number;
+  className?: string;
+  style?: React.CSSProperties;
+  onReachEnd?: () => void;
+  children: (item: T, index: number) => ReactNode;
+}
+
+export function VirtualList<T>({
+  items,
+  itemHeight,
+  keyField,
+  buffer = 5,
+  className,
+  style,
+  onReachEnd,
+  children,
+}: VirtualListProps<T>) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const tickingRef = useRef(false);
+
+  const [scrollTop, setScrollTop] = useState(0);
+  const [containerHeight, setContainerHeight] = useState(0);
+
+  const deferredItems = useDeferredValue(items);
+  const totalHeight = deferredItems.length * itemHeight;
+
+  // ResizeObserver를 통한 컨테이너 높이 감지
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new ResizeObserver(() => {
+      setContainerHeight(containerRef.current!.clientHeight);
+    });
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  // 스크롤 이벤트 감지
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const onScroll = () => {
+      if (!tickingRef.current) {
+        requestAnimationFrame(() => {
+          setScrollTop(container.scrollTop);
+          tickingRef.current = false;
+        });
+        tickingRef.current = true;
+      }
+    };
+
+    container.addEventListener("scroll", onScroll);
+    return () => container.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // 렌더링할 아이템 범위 계산
+  const visibleCount = Math.ceil(containerHeight / itemHeight);
+  const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - buffer);
+  const endIndex = Math.min(
+    deferredItems.length,
+    startIndex + visibleCount + buffer * 2
+  );
+
+  const visibleItems = useMemo(() => {
+    return deferredItems.slice(startIndex, endIndex);
+  }, [deferredItems, startIndex, endIndex]);
+
+  // IntersectionObserver를 통한 하단 감지
+  const handleIntersect = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      const entry = entries[0];
+      if (entry.isIntersecting && onReachEnd) {
+        onReachEnd();
+      }
+    },
+    [onReachEnd]
+  );
+
+  useEffect(() => {
+    if (!sentinelRef.current || !onReachEnd) return;
+
+    const observer = new IntersectionObserver(handleIntersect, {
+      root: containerRef.current,
+      rootMargin: "200px",
+    });
+
+    observer.observe(sentinelRef.current);
+    return () => observer.disconnect();
+  }, [handleIntersect, onReachEnd]);
+
+  return (
+    <div
+      ref={containerRef}
+      className={className}
+      style={{ overflowY: "auto", position: "relative", ...style }}
+    >
+      <div style={{ height: totalHeight, position: "relative" }}>
+        {visibleItems.map((item, i) => {
+          const index = startIndex + i;
+          const key = item[keyField] as React.Key;
+
+          return (
+            <div
+              key={key}
+              style={{
+                position: "absolute",
+                top: index * itemHeight,
+                height: itemHeight,
+                left: 0,
+                right: 0,
+              }}
+            >
+              {children(item, index)}
+            </div>
+          );
+        })}
+
+        <div
+          ref={sentinelRef}
+          style={{
+            position: "absolute",
+            top: totalHeight - 1,
+            height: "1px",
+            width: "100%",
+          }}
+        />
+      </div>
+    </div>
+  );
+}
