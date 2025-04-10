@@ -154,3 +154,88 @@ export function VirtualList<T>({
     </div>
   );
 }
+interface VirtualListProps<T> {
+  totalCount: number;
+  itemHeight: number;
+  buffer?: number;
+  className?: string;
+  style?: React.CSSProperties;
+  getKey: (index: number) => string | number;
+  children: (index: number) => ReactNode;
+}
+
+export function VirtualList<T>({
+  totalCount,
+  itemHeight,
+  buffer = 5,
+  className,
+  style,
+  getKey,
+  children,
+}: VirtualListProps<T>) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const tickingRef = useRef(false);
+
+  const [scrollTop, setScrollTop] = useState(0);
+  const [containerHeight, setContainerHeight] = useState(0);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new ResizeObserver(() => {
+      setContainerHeight(containerRef.current!.clientHeight);
+    });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const onScroll = () => {
+      if (!tickingRef.current) {
+        requestAnimationFrame(() => {
+          setScrollTop(container.scrollTop);
+          tickingRef.current = false;
+        });
+        tickingRef.current = true;
+      }
+    };
+
+    container.addEventListener("scroll", onScroll);
+    return () => container.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const visibleCount = Math.ceil(containerHeight / itemHeight);
+  const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - buffer);
+  const endIndex = Math.min(totalCount, startIndex + visibleCount + buffer * 2);
+
+  return (
+    <div
+      ref={containerRef}
+      className={className}
+      style={{ overflowY: "auto", position: "relative", ...style }}
+    >
+      <div style={{ height: totalCount * itemHeight, position: "relative" }}>
+        {Array.from({ length: endIndex - startIndex }, (_, i) => {
+          const index = startIndex + i;
+          return (
+            <div
+              key={getKey(index)}
+              style={{
+                position: "absolute",
+                top: index * itemHeight,
+                height: itemHeight,
+                left: 0,
+                right: 0,
+              }}
+            >
+              {children(index)}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
